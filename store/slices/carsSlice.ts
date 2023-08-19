@@ -1,5 +1,4 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-import { stat } from "fs";
 
 interface Car {
   id: string;
