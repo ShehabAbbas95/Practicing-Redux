@@ -12,5 +12,9 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.45.4",
     "react-redux": "^8.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "20.5.1",
+    "typescript": "5.1.6"
   }
 }
