@@ -1,3 +1,4 @@
+import "../styles/globals.css";
 import React from "react";
 import CarForm from "../components/CarForm";
 import CarList from "../components/CarList";
