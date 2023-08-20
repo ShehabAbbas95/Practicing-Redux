@@ -1,17 +1,43 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import Input from "./Input";
+import { useDispatch, useSelector } from "react-redux";
+import { addCar, changeCost, changeName } from "../../store";
+import { FormInitialStateProps } from "../../store/slices/formSlice";
 
 type FormValues = {
-  firstName: string;
-  lastName: string;
+  carName: string;
+  carCost: number;
   email: string;
+  // carimage?: FileList;
 };
 
 const Form = () => {
-  const { register, handleSubmit } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+  const { register, handleSubmit, reset } = useForm<FormValues>();
+  const dispatch = useDispatch();
+  const { carName, carCost } = useSelector(
+    (state: { form: FormInitialStateProps }) => {
+      return {
+        carName: state.form.carName,
+        carCost: state.form.carCost,
+      };
+    }
+  );
+  // const cost = useSelector(
+  //   (state: { cars: { Car: { cost: number } }[] }) => state.cars[0]?.Car?.cost
+  // );
 
+  const handleNameChange = (e) => {
+    dispatch(changeName(e.target.value));
+  };
+
+  const handleCarCost = (e) => {
+    const carCost = parseInt(e.target.value) || 0;
+    dispatch(changeCost(carCost));
+  };
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    dispatch(addCar({ carName: data.carName, carCost: data.carCost }));
+    () => reset();
+  };
   return (
     <>
       <form
@@ -25,59 +51,56 @@ const Form = () => {
           <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label
-                htmlFor="first-name"
+                htmlFor="first-carName"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                First name
+                First carName
               </label>
               <div className="mt-2">
                 <input
-                  {...register("firstName")}
                   type="text"
-                  name="first-name"
-                  id="first-name"
-                  autoComplete="given-name"
+                  {...register("carName")}
+                  onChange={handleNameChange}
+                  value={carName}
                   className="px-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-                {/* <Input /> */}
               </div>
             </div>
-
             <div className="sm:col-span-3">
               <label
-                htmlFor="last-name"
+                htmlFor="Cost"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Last name
+                Car Cost
               </label>
               <div className="mt-2">
                 <input
-                  type="text"
-                  name="last-name"
-                  id="last-name"
-                  autoComplete="family-name"
+                  value={carCost || ""}
+                  type="number"
+                  {...register("carCost")}
+                  onChange={handleCarCost}
                   className="px-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
-
-            <div className="sm:col-span-4">
+            {/* <div className="sm:col-span-3">
               <label
-                htmlFor="email"
+                htmlFor="car-model"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Email address
+                Car Image
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
+                  // value={carName}
+                  {...register("carimage")}
+                  type="file"
+                  name="car-model"
+                  id="car-model"
                   className="px-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">

@@ -1,21 +1,18 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { Provider } from "react-redux";
-import { store } from "../store";
 import React from "react";
 import App from "./_app";
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>Car App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        <Provider store={store}>
-          <App />
-        </Provider>
+        <App />
       </main>
 
       <footer className="hidden">
