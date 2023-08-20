@@ -3,12 +3,12 @@ import { addCar } from "./carsSlice";
 
 export interface FormInitialStateProps {
   carName: string;
-  carCost: number;
+  carCost: string;
 }
 
 const initialState: FormInitialStateProps = {
   carName: "",
-  carCost: 0,
+  carCost: "",
 };
 
 const formSlice = createSlice({
@@ -25,7 +25,7 @@ const formSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(addCar, (state, action) => {
       state.carName = "";
-      state.carCost = 0;
+      state.carCost = "";
     });
   },
 });

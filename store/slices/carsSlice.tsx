@@ -3,7 +3,7 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 export interface Car {
   id: string;
   carName: string;
-  carCost: number;
+  carCost: string;
 }
 export interface CarInitialStateProps {
   data: Car[];
