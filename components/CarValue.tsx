@@ -10,12 +10,10 @@ const CarValue: FC = () => {
         .toLowerCase()
         .includes(state.cars.searchTerm.toLowerCase());
     });
-    let cost: number = 0;
-    for (let car of filteredCars) {
-      let carCost = parseInt(car.carCost);
-      cost += carCost;
-    }
-    return cost.toString(); // convert number to string
+
+    return filteredCars.reduce((acc, car) => {
+      return acc + parseInt(car.carCost);
+    }, 0); // convert number to string
   });
   return (
     <div>
