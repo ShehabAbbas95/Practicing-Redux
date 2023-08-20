@@ -5,7 +5,9 @@ import GridList from "./ui/GridList";
 
 const CarList: FC = () => {
   const carsData = useSelector((state: { cars: CarInitialStateProps }) => {
-    return state.cars.data;
+    return state.cars.data.filter((car) =>
+      car.carName.toLowerCase().includes(state.cars.searchTerm.toLowerCase())
+    );
   });
   const dispatch = useDispatch();
   const handleCarDelete = (car) => {
