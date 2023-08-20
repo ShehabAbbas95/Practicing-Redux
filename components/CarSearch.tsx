@@ -15,7 +15,7 @@ const CarSearch: FC = () => {
   };
   return (
     <div>
-      <h1>CarSearch</h1>
+      {/* <h1>CarSearch</h1> */}
 
       <div className="sm:col-span-3">
         <label

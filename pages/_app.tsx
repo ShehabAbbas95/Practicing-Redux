@@ -10,9 +10,9 @@ import { store } from "../store";
 const App = () => {
   return (
     <Provider store={store}>
+      <CarSearch />
       <CarForm />
       <CarList />
-      <CarSearch />
       <CarValue />
     </Provider>
   );
