@@ -1,16 +1,16 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-interface Car {
+export interface Car {
   id: string;
-  name: string;
-  cost: number;
+  carName: string;
+  carCost: number;
 }
-interface InitialStateProps {
-  cars: Car[];
+export interface CarInitialStateProps {
+  data: Car[];
   searchTerm: string;
 }
-const initialState: InitialStateProps = {
-  cars: [],
+const initialState: CarInitialStateProps = {
+  data: [],
   searchTerm: "",
 };
 
@@ -22,21 +22,21 @@ const carsSlice = createSlice({
       state.searchTerm = action.payload;
     },
     // Assumption:
-    // action.payload === { name: '', , cost : 000}
+    // action.payload === { carName: '', , cost : 000}
     // Remember this state can't access the slice created from FormSlice
     addCar(state, action) {
-      state.cars.push({
-        name: action.payload.name,
-        cost: action.payload.cost,
+      state.data.push({
+        carName: action.payload.carName,
+        carCost: action.payload.carCost,
         // id: Math.random(), Redux provide us a way to add random id
         id: nanoid(5),
       });
     },
     removeCar(state, action) {
-      const updated = state.cars.filter((car) => {
+      const updated = state.data.filter((car) => {
         return car.id !== action.payload;
       });
-      state.cars = updated;
+      state.data = updated;
     },
   },
 });
