@@ -1,6 +1,5 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { Provider } from "react-redux";
 import React from "react";
 import App from "./_app";
 export default function Home() {
